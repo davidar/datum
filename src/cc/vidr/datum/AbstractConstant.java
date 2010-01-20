@@ -36,7 +36,16 @@ public abstract class AbstractConstant<T> implements Constant {
     protected AbstractConstant(T data) {
         this.data = data;
     }
-
+    
+    /**
+     * Return the data associated with this constant.
+     * 
+     * @return  the data associated with this constant
+     */
+    public T getValue() {
+        return data;
+    }
+    
     public final void unify(Term term, Substitution substitution)
     throws UnificationException {
         if(term.isVariable())

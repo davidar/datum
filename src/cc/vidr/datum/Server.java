@@ -69,6 +69,32 @@ public final class Server {
     }
     
     /**
+     * Convenience method to aggregate the facts matching the given goals.
+     * 
+     * @param goals  the goals
+     * @return       the array of facts
+     */
+    public static Literal[] query(Literal... goals) {
+        Set<Literal> facts = new HashSet<Literal>();
+        for(Literal goal : goals)
+            facts.addAll(getServer(goal).facts);
+        return facts.toArray(new Literal[0]);
+    }
+    
+    /**
+     * Return the facts matching the head of the given rule, using the
+     * conditions in the body of the clause rather than those in the database.
+     * 
+     * @param clause  the query clause
+     * @return        the array of facts
+     */
+    public static Literal[] query(Clause clause) {
+        Server server = new Server();
+        server.add(clause.rename());
+        return server.facts.toArray(new Literal[0]);
+    }
+    
+    /**
      * Return the server for the given goal.
      * 
      * @param goal  the goal

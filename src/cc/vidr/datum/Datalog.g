@@ -59,13 +59,28 @@ literal returns [Literal result]
 
 term returns [Term result]
     : ATOM     { $result = new Atom($ATOM.text); }
+    | STRING   { $result = StringTerm.parse($STRING.text); }
     | VARIABLE { $result = variableFactory.get($VARIABLE.text); }
     ;
 
-ATOM: ('a'..'z') ('a'..'z'|'A'..'Z'|'0'..'9'|'_')*;
+ATOM
+    : ('a'..'z') ('a'..'z'|'A'..'Z'|'0'..'9'|'_')*
+      ( '/' ('1'..'9') ('0'..'9')* )?
+    ;
 
-VARIABLE: ('A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'0'..'9'|'_')*;
+VARIABLE : ('A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'0'..'9'|'_')* ;
 
-COMMENT: '%' ~('\n'|'\r')* '\r'? '\n' {$channel=HIDDEN;};
+COMMENT : '%' ~('\n'|'\r')* '\r'? '\n' {$channel=HIDDEN;} ;
 
-WS: (' '|'\t'|'\r'|'\n') {$channel=HIDDEN;};
+WS : (' '|'\t'|'\r'|'\n') {$channel=HIDDEN;} ;
+
+STRING : '"' ( ESC_SEQ | ~('\\'|'"') )* '"' ;
+
+fragment
+HEX_DIGIT : ('0'..'9'|'a'..'f'|'A'..'F') ;
+
+fragment
+ESC_SEQ
+    : '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\')
+    | '\\' 'u' HEX_DIGIT HEX_DIGIT HEX_DIGIT HEX_DIGIT
+    ;

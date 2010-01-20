@@ -25,12 +25,25 @@ package cc.vidr.datum;
 public class Variable implements Term {
     private static final long serialVersionUID = -8998096211913532047L;
     
+    /**
+     * Create an array of variables of the given size.
+     * 
+     * @param size  the number of variables to create
+     * @return      the array of variables
+     */
+    public static Variable[] array(int size) {
+        Variable[] variables = new Variable[size];
+        for(int i = 0; i < size; i++)
+            variables[i] = new Variable();
+        return variables;
+    }
+    
     public void unify(Term term, Substitution substitution) {
         substitution.put(this, term);
     }
     
     public Term subst(Substitution substitution) {
-        return substitution.subst(this);
+        return substitution == null ? this : substitution.subst(this);
     }
     
     public boolean isVariable() {

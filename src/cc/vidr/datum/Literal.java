@@ -53,6 +53,27 @@ public final class Literal implements Serializable {
     }
     
     /**
+     * Create a new literal with the given predicate, and unique variables as
+     * the arguments.
+     * 
+     * @param predicate  the predicate
+     */
+    public Literal(String predicate) {
+        this(predicate, Variable.array(getPredicateArity(predicate)));
+    }
+    
+    /**
+     * Convenience method to determine the arity of a predicate.
+     * 
+     * @param predicate  the predicate
+     * @return           the arity of the predicate
+     */
+    public static int getPredicateArity(String predicate) {
+        int slashPos = predicate.lastIndexOf('/');
+        return Integer.parseInt(predicate.substring(slashPos + 1));
+    }
+    
+    /**
      * Return the predicate of the literal.
      * 
      * @return  the predicate
