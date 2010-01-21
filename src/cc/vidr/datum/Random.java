@@ -36,9 +36,9 @@ public final class Random {
      * 
      * @param <T>  the type of the array
      * @param a    the array
-     * @return     a random element in the array
+     * @return     a random element in the array, or null if the array is empty
      */
     public static <T> T element(T[] a) {
-        return a[random.nextInt(a.length)];
+        return a.length > 0 ? a[random.nextInt(a.length)] : null;
     }
 }

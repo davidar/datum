@@ -270,9 +270,13 @@ public class Template {
         ClauseBuilder builder = new ClauseBuilder();
         builder.setHead(goal);
         int arity = goal.getArity();
-        for(int i = 0; i < arity; i++)
-            builder.addCondition(new Literal(
-                    predicate, first.getArgument(i), second.getArgument(i)));
+        for(int i = 0; i < arity; i++) {
+            Term firstArgument = first.getArgument(i);
+            Term secondArgument = second.getArgument(i);
+            if(!firstArgument.isVariable() || !secondArgument.isVariable())
+                builder.addCondition(new Literal(
+                        predicate, firstArgument, secondArgument));
+        }
         return Server.query(builder.toClause());
     }
     

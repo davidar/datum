@@ -147,9 +147,9 @@ public final class Clause implements Serializable {
         StringBuilder builder = new StringBuilder();
         builder.append(head);
         if(body.length > 0) {
-            builder.append(" :-\n    ").append(body[0]);
+            builder.append(" :- ").append(body[0]);
             for(int i = 1; i < body.length; i++)
-                builder.append(",\n    ").append(body[i]);
+                builder.append(", ").append(body[i]);
         }
         builder.append('.');
         return builder.toString();

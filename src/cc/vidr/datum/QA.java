@@ -58,19 +58,23 @@ public final class QA {
     private static String sanitize(String s) {
         return s.toLowerCase()
                 .replaceAll("[?.,-]", "")
-                .replaceAll("\\s+", " ");
+                .replaceAll("\\s+", " ")
+                .trim();
     }
     
     /**
      * Generate a natural language response for the given fact.
      * 
      * @param fact  the fact
-     * @return      the natural language response
+     * @return      the natural language response, or null if unable to
+     *              generate one
      */
     public static String respond(Literal fact) {
         Template statementTemplate = Random.element(
                 Template.getStatementTemplates(fact.getPredicate()));
         Literal loweredFact = Random.element(Template.lower(fact));
+        if(statementTemplate == null || loweredFact == null)
+            return null;
         try {
             return humanize(statementTemplate.generate(loweredFact));
         } catch(UnificationException e) {
@@ -87,6 +91,6 @@ public final class QA {
     private static String humanize(String s) {
         char[] chars = s.toCharArray();
         chars[0] = Character.toTitleCase(chars[0]);
-        return new String(chars) + '.';
+        return new String(chars);
     }
 }
