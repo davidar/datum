@@ -10,6 +10,8 @@ Datum depends on the following libraries:
 - ANTLR v3 [6]
 - Apache Commons Lang [7]
 
+See the INSTALL file for compilation and usage information.
+
 [1] http://da.vidr.cc/projects/datum/
 [2] http://en.wikipedia.org/wiki/Question_answering
 [3] http://en.wikipedia.org/wiki/Datalog

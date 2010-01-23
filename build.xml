@@ -1,0 +1,65 @@
+<?xml version="1.0" ?>
+<project name="Datum" default="dist" basedir=".">
+    <property name="src"   location="src"/>
+    <property name="lib"   location="lib"/>
+    <property name="build" location="build"/>
+    <property name="dist"  location="dist"/>
+    <property name="doc"   location="doc"/>
+    
+    <path id="classpath">
+        <pathelement location="${build}"/>
+        <fileset dir="${lib}" includes="**/*.jar"/>
+    </path>
+    
+    <target name="init">
+        <tstamp/>
+        <mkdir dir="${build}"/>
+        <mkdir dir="${dist}"/>
+        <mkdir dir="${doc}"/>
+    </target>
+    
+    <target name="antlr" depends="init">
+        <java classname="org.antlr.Tool" classpathref="classpath">
+            <arg value="${src}/cc/vidr/datum/Datalog.g"/>
+        </java>
+    </target>
+    
+    <target name="compile" depends="antlr">
+        <javac srcdir="${src}" destdir="${build}" classpathref="classpath">
+            <!-- disable compile-time DataNucleus enhancement -->
+            <compilerarg value="-proc:none"/>
+        </javac>
+        <mkdir dir="${build}/META-INF"/>
+        <copy file="jdoconfig-derby.xml"
+            tofile="${build}/META-INF/jdoconfig.xml"/>
+    </target>
+    
+    <target name="enhance" depends="compile">
+        <!-- http://datanucleus.org/products/datanucleus/enhancer.html#ant -->
+        <taskdef name="datanucleusenhancer" classpathref="classpath"
+            classname="org.datanucleus.enhancer.tools.EnhancerTask" />
+        <datanucleusenhancer classpathref="classpath"
+                             failonerror="true" verbose="true">
+            <fileset dir="${build}" includes="**/*.jdo"/>
+            <jvmarg line="-Djava.util.logging.config.file=logging.properties"/>
+        </datanucleusenhancer>
+    </target>
+    
+    <target name="dist" depends="enhance">
+        <jar jarfile="${dist}/datum.jar" basedir="${build}"/>
+    </target>
+    
+    <target name="doc" depends="antlr">
+        <javadoc sourcepath="${src}" destdir="${doc}" classpathref="classpath"
+                 author="true" use="true"/>
+    </target>
+    
+    <target name="clean">
+        <delete dir="${build}"/>
+        <delete dir="${dist}"/>
+        <delete dir="${doc}"/>
+        <delete file="Datalog.tokens"/>
+        <delete file="${src}/cc/vidr/datum/DatalogLexer.java"/>
+        <delete file="${src}/cc/vidr/datum/DatalogParser.java"/>
+    </target>
+</project>

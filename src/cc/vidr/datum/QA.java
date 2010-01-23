@@ -76,21 +76,9 @@ public final class QA {
         if(statementTemplate == null || loweredFact == null)
             return null;
         try {
-            return humanize(statementTemplate.generate(loweredFact));
+            return statementTemplate.generate(loweredFact);
         } catch(UnificationException e) {
             throw new RuntimeException("Error generating response");
         }
-    }
-    
-    /**
-     * Convert the given string to a more human-friendly format.
-     * 
-     * @param s  the string to format
-     * @return   the formatted string
-     */
-    private static String humanize(String s) {
-        char[] chars = s.toCharArray();
-        chars[0] = Character.toTitleCase(chars[0]);
-        return new String(chars);
     }
 }

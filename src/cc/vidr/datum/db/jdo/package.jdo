@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+<jdo xmlns="http://java.sun.com/xml/ns/jdo/jdo">
+    <package name="cc.vidr.datum.db.jdo">
+        <class name="JDOFact">
+            <field persistence-modifier="persistent" name="id"/>
+            <field persistence-modifier="persistent" name="fact"/>
+            <field persistence-modifier="persistent" name="predicate"/>
+            <field persistence-modifier="persistent" name="argument0"/>
+            <field persistence-modifier="persistent" name="argument1"/>
+            <field persistence-modifier="persistent" name="argument2"/>
+            <field persistence-modifier="persistent" name="argument3"/>
+        </class>
+        <class name="JDORule">
+            <field persistence-modifier="persistent" name="id"/>
+            <field persistence-modifier="persistent" name="rule"/>
+            <field persistence-modifier="persistent" name="predicate"/>
+        </class>
+    </package>
+</jdo>

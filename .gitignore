@@ -1,0 +1,11 @@
+bin/
+build/
+doc/
+dist/
+derby-database/
+.classpath
+.project
+Datalog.tokens
+derby.log
+TODO
+

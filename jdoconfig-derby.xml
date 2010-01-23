@@ -1,0 +1,14 @@
+<?xml version="1.0" ?>
+<jdoconfig xmlns="http://java.sun.com/xml/ns/jdo/jdoconfig">
+    <persistence-manager-factory name="transactions-optional">
+        <property name="javax.jdo.PersistenceManagerFactoryClass"
+            value="org.datanucleus.jdo.JDOPersistenceManagerFactory"/>
+        <property name="javax.jdo.option.ConnectionDriverName"
+            value="org.apache.derby.jdbc.EmbeddedDriver"/>
+        <property name="javax.jdo.option.ConnectionURL"
+            value="jdbc:derby:derby-database;create=true"/>
+        <property name="javax.jdo.option.ConnectionUserName" value="datum"/>
+        <property name="javax.jdo.option.ConnectionPassword" value="datum"/>
+        <property name="datanucleus.autoCreateSchema" value="true"/>
+    </persistence-manager-factory>
+</jdoconfig>
