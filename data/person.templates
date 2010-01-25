@@ -1,0 +1,3 @@
+statement_template("#0 is a person", person/1).
+statement_template("#0 is male", male/1).
+statement_template("#0 is female", female/1).

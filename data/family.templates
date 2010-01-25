@@ -1,0 +1,10 @@
+statement_template("#1 is the offspring of #0", offspring/2).
+statement_template("#1 is the son of #0", son/2).
+statement_template("#1 is the daughter of #0", daughter/2).
+statement_template("#1 is the parent of #0", parent/2).
+statement_template("#1 is the father of #0", father/2).
+statement_template("#1 is the mother of #0", mother/2).
+statement_template("#1 is the grandparent of #0", grandparent/2).
+statement_template("#1 is the grandfather of #0", grandfather/2).
+statement_template("#1 is the grandmother of #0", grandmother/2).
+statement_template("#1 is the ancestor of #0", ancestor/2).

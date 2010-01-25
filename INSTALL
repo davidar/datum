@@ -10,8 +10,13 @@ Then run `make` to compile.
 
 To import a datalog program into the database, run:
     ./datum.sh import FILE...
+Or to import the default data, run:
+    ./import_data.sh
+
 Then to start the interactive console, run:
     ./datum.sh
+And enter a question, such as:
+> Who are Hans Albert Einstein's ancestors?
 
 [1] http://antlr.org/download/antlr-3.2.jar
 [2] http://www.apache.org/dist/commons/lang/binaries/commons-lang-2.4-bin.tar.gz

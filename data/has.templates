@@ -1,0 +1,33 @@
+question_template("who is the #1 of #0", has/3).
+question_template("who is a #1 of #0", has/3).
+question_template("who is an #1 of #0", has/3).
+question_template("who is #0's #1", has/3).
+question_template("who are the #1 of #0", has/3).
+question_template("who are a #1 of #0", has/3).
+question_template("who are an #1 of #0", has/3).
+question_template("who are #0's #1", has/3).
+question_template("who was the #1 of #0", has/3).
+question_template("who was a #1 of #0", has/3).
+question_template("who was an #1 of #0", has/3).
+question_template("who was #0's #1", has/3).
+question_template("who were the #1 of #0", has/3).
+question_template("who were a #1 of #0", has/3).
+question_template("who were an #1 of #0", has/3).
+question_template("who were #0's #1", has/3).
+question_template("what is the #1 of #0", has/3).
+question_template("what is a #1 of #0", has/3).
+question_template("what is an #1 of #0", has/3).
+question_template("what is #0's #1", has/3).
+question_template("what are the #1 of #0", has/3).
+question_template("what are a #1 of #0", has/3).
+question_template("what are an #1 of #0", has/3).
+question_template("what are #0's #1", has/3).
+question_template("what was the #1 of #0", has/3).
+question_template("what was a #1 of #0", has/3).
+question_template("what was an #1 of #0", has/3).
+question_template("what was #0's #1", has/3).
+question_template("what were the #1 of #0", has/3).
+question_template("what were a #1 of #0", has/3).
+question_template("what were an #1 of #0", has/3).
+question_template("what were #0's #1", has/3).
+statement_template("#2 is #0's #1", has/3).

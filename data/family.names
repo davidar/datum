@@ -1,0 +1,23 @@
+name(offspring, "child").
+
+preferred_name(offspring, "offspring").
+preferred_name(son, "son").
+preferred_name(daughter, "daughter").
+preferred_name(parent, "parent").
+preferred_name(father, "father").
+preferred_name(mother, "mother").
+preferred_name(grandparent, "grandparent").
+preferred_name(grandfather, "grandfather").
+preferred_name(grandmother, "grandmother").
+preferred_name(ancestor, "ancestor").
+
+plural("child", "children").
+plural("son", "sons").
+plural("daughter", "daughters").
+plural("parent", "parents").
+plural("father", "fathers").
+plural("mother", "mothers").
+plural("grandparent", "grandparents").
+plural("grandfather", "grandfathers").
+plural("grandmother", "grandmothers").
+plural("ancestor", "ancestors").

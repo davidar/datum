@@ -1,0 +1,29 @@
+name(abraham_einstein, "abraham einstein").
+name(helene_moos, "helene moos").
+name(julius_doerzbacher, "julius doerzbacher").
+name(jette_bernheimer, "jette bernheimer").
+name(hermann_einstein, "hermann einstein").
+name(pauline_koch, "pauline koch").
+name(milos_maric, "milos maric").
+name(marija_ruzic, "marija ruzic").
+name(albert_einstein, "albert einstein").
+name(maja_einstein, "maja einstein").
+name(mileva_maric, "mileva maric").
+name(lieserl_einstein, "lieserl einstein").
+name(hans_albert_einstein, "hans albert einstein").
+name(eduard_einstein, "eduard einstein").
+
+preferred_name(abraham_einstein, "Abraham Einstein").
+preferred_name(helene_moos, "Helene Moos").
+preferred_name(julius_doerzbacher, "Julius Doerzbacher").
+preferred_name(jette_bernheimer, "Jette Bernheimer").
+preferred_name(hermann_einstein, "Hermann Einstein").
+preferred_name(pauline_koch, "Pauline Koch").
+preferred_name(milos_maric, "Milo\u0161 Mari\u0107").
+preferred_name(marija_ruzic, "Marija Ru\u017ei\u0107").
+preferred_name(albert_einstein, "Albert Einstein").
+preferred_name(maja_einstein, "Maja Einstein").
+preferred_name(mileva_maric, "Mileva Mari\u0107").
+preferred_name(lieserl_einstein, "Lieserl Einstein").
+preferred_name(hans_albert_einstein, "Hans Albert Einstein").
+preferred_name(eduard_einstein, "Eduard Einstein").
