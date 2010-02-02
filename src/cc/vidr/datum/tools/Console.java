@@ -21,9 +21,12 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import org.antlr.runtime.RecognitionException;
 import org.apache.commons.lang.StringUtils;
 
+import cc.vidr.datum.Clause;
 import cc.vidr.datum.Literal;
+import cc.vidr.datum.Program;
 import cc.vidr.datum.QA;
 import cc.vidr.datum.Server;
 
@@ -33,6 +36,8 @@ import cc.vidr.datum.Server;
  * @author  David Roberts
  */
 public class Console {
+    private static final boolean DEBUG = true;
+    
     private static void printFact(Literal fact, int depth) {
         Literal[] proof = Server.getProof(fact);
         String response = StringUtils.capitalize(QA.respond(fact));
@@ -53,6 +58,8 @@ public class Console {
         BufferedReader in = new BufferedReader(
                 new InputStreamReader(System.in));
         while(true) {
+            int numServers = Server.getNumServers();
+            int numFacts = Server.getNumFacts();
             System.out.print("> ");
             String q = in.readLine();
             if(q == null || q.isEmpty()) {
@@ -60,10 +67,24 @@ public class Console {
                 break;
             }
             Literal[] facts = QA.query(q);
+            if(facts.length == 0) {
+                try {
+                    // perhaps the input is a datalog statement
+                    Program program = new Program(q);
+                    Clause[] query = program.parse();
+                    facts = Server.query(query[0].getHead());
+                } catch (RecognitionException e) {
+                    System.out.println("I don't know.");
+                }
+            }
             for(Literal fact : facts)
                 printFact(fact, 0);
-            if(facts.length == 0)
-                System.out.println("I don't know.");
+            if(DEBUG) {
+                System.err.println((Server.getNumServers() - numServers)
+                        + " servers spawned");
+                System.err.println((Server.getNumFacts() - numFacts)
+                        + " facts retrieved/generated");
+            }
         }
     }
 }

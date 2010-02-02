@@ -5,6 +5,7 @@ The following files will need to be copied to the lib/ directory:
 - datanucleus-core-2.0.0-release.jar, datanucleus-enhancer-2.0.0-release.jar,
   datanucleus-rdbms-2.0.0-release.jar, jdo2-api-2.3-ec.jar, asm-3.1.jar
   from [4]
+- json_simple-1.1.jar [5]
 
 Then run `make` to compile.
 
@@ -22,3 +23,4 @@ And enter a question, such as:
 [2] http://www.apache.org/dist/commons/lang/binaries/commons-lang-2.4-bin.tar.gz
 [3] http://www.apache.org/dist/db/derby/db-derby-10.5.3.0/db-derby-10.5.3.0-lib.tar.gz
 [4] http://prdownloads.sourceforge.net/project/datanucleus/datanucleus-accessplatform/2.0.0.release/datanucleus-accessplatform-full-deps-2.0.0-release.zip
+[5] http://json-simple.googlecode.com/files/json_simple-1.1.jar

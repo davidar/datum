@@ -7,4 +7,7 @@ statement_template("#1 is the mother of #0", mother/2).
 statement_template("#1 is the grandparent of #0", grandparent/2).
 statement_template("#1 is the grandfather of #0", grandfather/2).
 statement_template("#1 is the grandmother of #0", grandmother/2).
+statement_template("#0 and #1 are siblings", sibling/2).
+statement_template("#1 is the brother of #0", brother/2).
+statement_template("#1 is the sister of #0", sister/2).
 statement_template("#1 is the ancestor of #0", ancestor/2).

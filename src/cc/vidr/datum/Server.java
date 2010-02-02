@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import cc.vidr.datum.builtin.Builtin;
 import cc.vidr.datum.db.FactDatabase;
 import cc.vidr.datum.db.RuleDatabase;
 import cc.vidr.datum.db.jdo.JDOFactDatabase;
@@ -161,6 +162,24 @@ public final class Server {
     }
     
     /**
+     * Return the number of servers.
+     * 
+     * @return  the number of servers
+     */
+    public static int getNumServers() {
+        return servers.size();
+    }
+    
+    /**
+     * Return the number of facts that have been retrieved or generated.
+     * 
+     * @return  the number of facts
+     */
+    public static int getNumFacts() {
+        return proofs.size();
+    }
+    
+    /**
      * Return the server for the given goal.
      * 
      * @param goal  the goal
@@ -183,7 +202,12 @@ public final class Server {
      * @param goal  this server's goal
      */
     private void run(Literal goal) {
-        for(Literal fact : factDatabase.search(goal)) {
+        Literal[] facts;
+        if(Builtin.isBuiltinPredicate(goal.getPredicate()))
+            facts = Builtin.satisfy(goal);
+        else
+            facts = factDatabase.search(goal);
+        for(Literal fact : facts) {
             proofs.put(new Clause(fact).getVariantTag(), null);
             add(fact);
         }
@@ -253,7 +277,8 @@ public final class Server {
             add(newClause);
         } catch(UnificationException e) {
             throw new RuntimeException(
-                    "Server returned fact that does not unify with its goal");
+                    "Server returned fact that does not unify with its goal: "
+                    + fact + ", " + clause.getCondition(0));
         }
     }
     

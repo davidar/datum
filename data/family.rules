@@ -26,6 +26,19 @@ grandmother(X,Y) :-
     grandparent(X,Y),
     female(Y).
 
+sibling(X,Y) :-
+    parent(X,Z),
+    parent(Y,Z),
+    unequal(X,Y).
+sibling(X,Y) :-
+    sibling(Y,X).
+brother(X,Y) :-
+    sibling(X,Y),
+    male(Y).
+sister(X,Y) :-
+    sibling(X,Y),
+    female(Y).
+
 ancestor(X,Y) :-
     parent(X,Y).
 ancestor(X,Y) :-
@@ -41,4 +54,7 @@ has(X,mother,Y)      :- mother(X,Y).
 has(X,grandparent,Y) :- grandparent(X,Y).
 has(X,grandfather,Y) :- grandfather(X,Y).
 has(X,grandmother,Y) :- grandmother(X,Y).
+has(X,sibling,Y)     :- sibling(X,Y).
+has(X,brother,Y)     :- brother(X,Y).
+has(X,sister,Y)      :- sister(X,Y).
 has(X,ancestor,Y)    :- ancestor(X,Y).

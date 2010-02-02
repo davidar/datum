@@ -1,0 +1,4 @@
+name(X,Y) :-
+    freebase_search(Y,X).
+preferred_name(X,Y) :-
+    freebase_triple(X,"name",text,Y).

@@ -25,7 +25,8 @@
     </target>
     
     <target name="compile" depends="antlr">
-        <javac srcdir="${src}" destdir="${build}" classpathref="classpath">
+        <javac srcdir="${src}" destdir="${build}" classpathref="classpath"
+               debug="on">
             <!-- disable compile-time DataNucleus enhancement -->
             <compilerarg value="-proc:none"/>
         </javac>

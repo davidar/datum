@@ -1,0 +1,3 @@
+statement_template("#0 and #1 are distinct entities", unequal/2).
+statement_template("freebase has a link between #0 and #3 of type '#1' (#2)",
+                   freebase_triple/4).

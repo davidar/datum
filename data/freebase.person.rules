@@ -1,0 +1,3 @@
+person(X)   :- freebase_triple(X,"type",object,"/people/person").
+gender(X,Y) :- freebase_triple(X,"/people/person/gender",object,Y).
+parent(X,Y) :- freebase_triple(X,"/people/person/parents",object,Y).

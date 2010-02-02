@@ -9,6 +9,9 @@ preferred_name(mother, "mother").
 preferred_name(grandparent, "grandparent").
 preferred_name(grandfather, "grandfather").
 preferred_name(grandmother, "grandmother").
+preferred_name(sibling, "sibling").
+preferred_name(brother, "brother").
+preferred_name(sister, "sister").
 preferred_name(ancestor, "ancestor").
 
 plural("child", "children").
@@ -20,4 +23,7 @@ plural("mother", "mothers").
 plural("grandparent", "grandparents").
 plural("grandfather", "grandfathers").
 plural("grandmother", "grandmothers").
+plural("sibling", "siblings").
+plural("brother", "brothers").
+plural("sister", "sisters").
 plural("ancestor", "ancestors").

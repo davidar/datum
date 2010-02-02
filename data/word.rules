@@ -1,5 +1,7 @@
 name(X,Y) :-
     preferred_name(X,Y).
 name(X,Y) :-
-    name(X,Z),
-    plural(Z,Y).
+    plural(Z,Y),
+    name(X,Z).
+preferred_name(X,X) :-
+    string(X).

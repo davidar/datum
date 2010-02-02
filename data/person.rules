@@ -1,0 +1,8 @@
+male(X) :-
+    gender(X,male).
+female(X) :-
+    gender(X,female).
+gender(X,male) :-
+    male(X).
+gender(X,female) :-
+    female(X).
