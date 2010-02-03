@@ -26,7 +26,7 @@ import java.net.URLConnection;
 import java.util.List;
 
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
+import org.json.simple.JSONValue;
 import org.json.simple.parser.ParseException;
 
 import cc.vidr.datum.Atom;
@@ -40,7 +40,6 @@ import cc.vidr.datum.Term;
  */
 public final class FreebaseUtils {
     private static final String endpoint = "http://api.freebase.com/api/";
-    private static final JSONParser parser = new JSONParser();
     
     /**
      * Prevent instantiation.
@@ -63,7 +62,7 @@ public final class FreebaseUtils {
         connection.connect();
         InputStream stream = connection.getInputStream();
         Reader reader = new InputStreamReader(stream);
-        JSONObject o = (JSONObject) parser.parse(reader);
+        JSONObject o = (JSONObject) JSONValue.parse(reader);
         return (List<JSONObject>) o.get("result");
     }
     

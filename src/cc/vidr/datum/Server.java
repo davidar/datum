@@ -121,7 +121,7 @@ public final class Server {
      * @return      the array of facts
      */
     public static Literal[] query(Literal goal) {
-        return getServer(goal).facts.toArray(new Literal[0]);
+        return getServer(goal).getFacts();
     }
     
     /**
@@ -133,7 +133,8 @@ public final class Server {
     public static Literal[] query(Literal... goals) {
         Set<Literal> facts = new HashSet<Literal>();
         for(Literal goal : goals)
-            facts.addAll(getServer(goal).facts);
+            for(Literal fact : query(goal))
+                facts.add(fact);
         return facts.toArray(new Literal[0]);
     }
     
@@ -147,7 +148,7 @@ public final class Server {
     public static Literal[] query(Clause clause) {
         Server server = new Server(false);
         server.add(clause.rename());
-        return server.facts.toArray(new Literal[0]);
+        return server.getFacts();
     }
     
     /**
@@ -186,13 +187,24 @@ public final class Server {
      * @return      the server for the goal
      */
     private static Server getServer(Literal goal) {
-        Server server = servers.get(goal.getVariantTag());
-        if(server == null) {
-            server = new Server();
-            servers.put(goal.getVariantTag(), server);
-            server.run(goal);
+        String tag = goal.getVariantTag();
+        Server server;
+        boolean newServer = false;
+        synchronized(servers) {
+            server = servers.get(tag);
+            if(server == null) {
+                server = new Server();
+                servers.put(goal.getVariantTag(), server);
+                newServer = true;
+            }
         }
+        if(newServer)
+            server.run(goal);
         return server;
+    }
+    
+    private synchronized Literal[] getFacts() {
+        return facts.toArray(new Literal[0]);
     }
     
     /**
@@ -201,14 +213,16 @@ public final class Server {
      * 
      * @param goal  this server's goal
      */
-    private void run(Literal goal) {
+    private synchronized void run(Literal goal) {
         Literal[] facts;
         if(Builtin.isBuiltinPredicate(goal.getPredicate()))
             facts = Builtin.satisfy(goal);
         else
             facts = factDatabase.search(goal);
         for(Literal fact : facts) {
-            proofs.put(new Clause(fact).getVariantTag(), null);
+            synchronized(proofs) {
+                proofs.put(new Clause(fact).getVariantTag(), null);
+            }
             add(fact);
         }
         for(Clause rule : ruleDatabase.search(goal))
@@ -222,8 +236,10 @@ public final class Server {
      * @return        the list of facts currently held by the server
      */
     private Literal[] request(Server client) {
-        clients.add(client);
-        return facts.toArray(new Literal[0]);
+        synchronized(clients) {
+            clients.add(client);
+            return facts.toArray(new Literal[0]);
+        }
     }
     
     /**
@@ -244,11 +260,13 @@ public final class Server {
      * @return        the clauses dependent on the server
      */
     private List<Clause> clauses(Server server) {
-        if(clauses.containsKey(server))
-            return clauses.get(server);
-        List<Clause> list = new ArrayList<Clause>();
-        clauses.put(server, list);
-        return list;
+        synchronized(clauses) {
+            if(clauses.containsKey(server))
+                return clauses.get(server);
+            List<Clause> list = new ArrayList<Clause>();
+            clauses.put(server, list);
+            return list;
+        }
     }
     
     /**
@@ -271,9 +289,11 @@ public final class Server {
             Literal condition = clause.getCondition(0);
             Clause newClause = clause.pop().subst(condition.unify(fact));
             String newClauseTag = newClause.getVariantTag();
-            if(primary && !proofs.containsKey(newClauseTag))
-                proofs.put(newClauseTag,
-                    new ProofNode(proofs.get(clause.getVariantTag()), fact));
+            synchronized(proofs) {
+                if(primary && !proofs.containsKey(newClauseTag))
+                    proofs.put(newClauseTag, new ProofNode(
+                            proofs.get(clause.getVariantTag()), fact));
+            }
             add(newClause);
         } catch(UnificationException e) {
             throw new RuntimeException(
@@ -305,10 +325,16 @@ public final class Server {
      * @param fact  the matching fact
      */
     private void add(Literal fact) {
-        if(facts.contains(fact))
-            return;
-        facts.add(fact);
-        for(Server client : clients)
+        synchronized(facts) {
+            if(facts.contains(fact))
+                return;
+            facts.add(fact);
+        }
+        Set<Server> clientsCopy;
+        synchronized(clients) {
+            clientsCopy = new HashSet<Server>(clients);
+        }
+        for(Server client : clientsCopy)
             client.respond(this, fact);
     }
 }
