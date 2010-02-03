@@ -66,19 +66,22 @@ public class Console {
                 System.out.println("Bye.");
                 break;
             }
-            Literal[] facts = QA.query(q);
-            if(facts.length == 0) {
+            Literal[] facts;
+            if(q.startsWith("?-")) {
                 try {
-                    // perhaps the input is a datalog statement
-                    Program program = new Program(q);
+                    Program program = new Program(q.substring(2));
                     Clause[] query = program.parse();
                     facts = Server.query(query[0].getHead());
                 } catch (RecognitionException e) {
-                    System.out.println("I don't know.");
+                    facts = new Literal[0];
                 }
+            } else {
+                facts = QA.query(q);
             }
             for(Literal fact : facts)
                 printFact(fact, 0);
+            if(facts.length == 0)
+                System.out.println("I don't know.");
             if(DEBUG) {
                 System.err.println((Server.getNumServers() - numServers)
                         + " servers spawned");

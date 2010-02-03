@@ -6,3 +6,10 @@ gender(X,male) :-
     male(X).
 gender(X,female) :-
     female(X).
+
+has(X,gender,Y)      :- gender(X,Y).
+has(X,birthplace,Y)  :- birthplace(X,Y).
+has(X,nationality,Y) :- nationality(X,Y).
+has(X,profession,Y)  :- profession(X,Y).
+has(X,religion,Y)    :- religion(X,Y).
+has(X,ethnicity,Y)   :- ethnicity(X,Y).

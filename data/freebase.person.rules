@@ -1,3 +1,8 @@
-person(X)   :- freebase_triple(X,"type",object,"/people/person").
-gender(X,Y) :- freebase_triple(X,"/people/person/gender",object,Y).
-parent(X,Y) :- freebase_triple(X,"/people/person/parents",object,Y).
+person(X)        :- freebase_triple(X,"type",object,"/people/person").
+gender(X,Y)      :- freebase_triple(X,"/people/person/gender",object,Y).
+parent(X,Y)      :- freebase_triple(X,"/people/person/parents",object,Y).
+birthplace(X,Y)  :- freebase_triple(X,"/people/person/place_of_birth",object,Y).
+nationality(X,Y) :- freebase_triple(X,"/people/person/nationality",object,Y).
+profession(X,Y)  :- freebase_triple(X,"/people/person/profession",object,Y).
+religion(X,Y)    :- freebase_triple(X,"/people/person/religion",object,Y).
+ethnicity(X,Y)   :- freebase_triple(X,"/people/person/ethnicity",object,Y).
