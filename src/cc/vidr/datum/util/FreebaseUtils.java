@@ -30,6 +30,7 @@ import org.json.simple.JSONValue;
 import org.json.simple.parser.ParseException;
 
 import cc.vidr.datum.Atom;
+import cc.vidr.datum.DateTimeTerm;
 import cc.vidr.datum.StringTerm;
 import cc.vidr.datum.Term;
 
@@ -75,10 +76,17 @@ public final class FreebaseUtils {
     public static String termToString(Term term) {
         if(term.isVariable())
             return "null";
-        if(term instanceof Atom)
-            return "\"/en/" + term + "\"";
+        if(term instanceof Atom) {
+            String s = term.toString();
+            if(s.startsWith("freebase:guid:"))
+                return "\"/guid/" +
+                        s.substring("freebase:guid:".length()) + "\"";
+            return "\"/en/" + s + "\"";
+        }
         if(term instanceof StringTerm)
             return term.toString();
+        if(term instanceof DateTimeTerm)
+            return '"' + term.toString() + '"';
         throw new IllegalArgumentException("Unsupported type: " + term);
     }
     
@@ -95,6 +103,8 @@ public final class FreebaseUtils {
         if(type.equals("text"))
             return "{\"lang\":\"/lang/en\"," +
                    "\"value\":" + termToString(term) + "}";
+        if(type.equals("datetime"))
+            return "{\"value\":" + termToString(term) + "}";
         throw new IllegalArgumentException("Invalid type: " + type);
     }
     
@@ -110,6 +120,8 @@ public final class FreebaseUtils {
             return FreebaseUtils.atomFromID((String) o.get("id"));
         if(type.equals("text"))
             return new StringTerm((String) o.get("value"));
+        if(type.equals("datetime"))
+            return new DateTimeTerm((String) o.get("value"));
         throw new IllegalArgumentException("Invalid type: " + type);
     }
     
@@ -122,6 +134,9 @@ public final class FreebaseUtils {
     public static Atom atomFromID(String id) {
         if(id.startsWith("/en/"))
             return new Atom(id.substring("/en/".length()));
+        if(id.startsWith("/guid/"))
+            return new Atom(
+                    "freebase:guid:" + id.substring("/guid/".length()));
         throw new IllegalArgumentException("Unsupported domain: " + id);
     }
 }

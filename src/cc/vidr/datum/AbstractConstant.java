@@ -42,7 +42,7 @@ public abstract class AbstractConstant<T> implements Constant {
      * 
      * @return  the data associated with this constant
      */
-    public T getValue() {
+    public final T getValue() {
         return data;
     }
     
@@ -60,5 +60,9 @@ public abstract class AbstractConstant<T> implements Constant {
     
     public final boolean isVariable() {
         return false;
+    }
+    
+    public final int hashCode() {
+        return data.hashCode();
     }
 }

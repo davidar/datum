@@ -4,4 +4,6 @@ name(X,Y) :-
     plural(Z,Y),
     name(X,Z).
 preferred_name(X,X) :-
-    string(X).
+    term_type(X,string).
+preferred_name(X,Y) :-
+    datetime_format(X,Y).

@@ -6,3 +6,5 @@ nationality(X,Y) :- freebase_triple(X,"/people/person/nationality",object,Y).
 profession(X,Y)  :- freebase_triple(X,"/people/person/profession",object,Y).
 religion(X,Y)    :- freebase_triple(X,"/people/person/religion",object,Y).
 ethnicity(X,Y)   :- freebase_triple(X,"/people/person/ethnicity",object,Y).
+birthdate(X,Y)   :- freebase_triple(X,"/people/person/date_of_birth",datetime,Y).
+deathdate(X,Y)   :- freebase_triple(X,"/people/deceased_person/date_of_death",datetime,Y).

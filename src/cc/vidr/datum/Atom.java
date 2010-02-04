@@ -47,10 +47,6 @@ public final class Atom extends AbstractConstant<String> implements Constant {
         return false;
     }
     
-    public int hashCode() {
-        return data.hashCode();
-    }
-    
     public String toString() {
         return data;
     }

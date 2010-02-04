@@ -6,4 +6,5 @@ datanucleus-enhancer-2.0.0-release.jar
 datanucleus-rdbms-2.0.0-release.jar
 derby.jar
 jdo2-api-2.3-ec.jar
+joda-time-1.6.jar
 json_simple-1.1.jar

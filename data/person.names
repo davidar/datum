@@ -2,6 +2,8 @@ name(gender, "sex").
 name(birthplace, "birth place").
 name(birthplace, "place of birth").
 name(profession, "job").
+name(birthdate, "dob").
+name(birthdate, "date of birth").
 
 preferred_name(gender, "gender").
 preferred_name(birthplace, "birthplace").
@@ -9,3 +11,4 @@ preferred_name(nationality, "nationality").
 preferred_name(profession, "profession").
 preferred_name(religion, "religion").
 preferred_name(ethnicity, "ethnicity").
+preferred_name(birthdate, "birthdate").

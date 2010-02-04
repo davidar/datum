@@ -17,22 +17,37 @@
 
 package cc.vidr.datum.builtin;
 
+import cc.vidr.datum.Atom;
+import cc.vidr.datum.DateTimeTerm;
 import cc.vidr.datum.Literal;
 import cc.vidr.datum.StringTerm;
+import cc.vidr.datum.Term;
 
 /**
- * Builtin for determining if the given term is a string.
+ * Builtin for determining if the type of a term.
  * 
  * @author  David Roberts
  */
-public class StringBuiltin extends Builtin {
+public class TermType extends Builtin {
     protected String predicate() {
-        return "string/1";
+        return "term_type/2";
     }
     
     protected Literal[] handle(Literal goal) throws Exception {
-        if(goal.getArgument(0) instanceof StringTerm)
-            return new Literal[] {goal};
+        Term term = goal.getArgument(0);
+        String type;
+        if(term instanceof Atom)
+            type = "atom";
+        else if(term instanceof StringTerm)
+            type = "string";
+        else if(term instanceof DateTimeTerm)
+            type = "datetime";
+        else
+            throw new IllegalArgumentException("Unrecognised type: " + term);
+        if(goal.getArgument(1).isVariable()
+        || goal.getArgument(1).toString().equals(type))
+            return new Literal[] {
+                new Literal(predicate(), term, new Atom(type)) };
         return new Literal[0];
     }
 }

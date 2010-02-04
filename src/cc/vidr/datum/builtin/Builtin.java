@@ -35,9 +35,10 @@ public abstract class Builtin {
     static {
         // register default builtins
         register(new Unequal());
-        register(new StringBuiltin());
+        register(new TermType());
         register(new FreebaseSearch());
         register(new FreebaseTriple());
+        register(new DateTimeFormatBuiltin());
     }
     
     /**
