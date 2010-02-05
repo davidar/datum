@@ -20,6 +20,8 @@ package cc.vidr.datum;
 import java.util.ArrayList;
 import java.util.List;
 
+import cc.vidr.datum.term.Term;
+
 /**
  * Allows incremental construction of Literals.
  * 

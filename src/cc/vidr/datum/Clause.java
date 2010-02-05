@@ -23,6 +23,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+import cc.vidr.datum.term.Variable;
+
 /**
  * A (Horn) clause is composed of a head literal, and a body of literals.
  * 

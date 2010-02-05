@@ -26,6 +26,9 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import cc.vidr.datum.term.Term;
+import cc.vidr.datum.term.Variable;
+
 /**
  * A literal is composed of a predicate and a list of terms.
  * 

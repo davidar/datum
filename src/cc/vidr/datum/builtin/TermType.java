@@ -17,11 +17,11 @@
 
 package cc.vidr.datum.builtin;
 
-import cc.vidr.datum.Atom;
-import cc.vidr.datum.DateTimeTerm;
 import cc.vidr.datum.Literal;
-import cc.vidr.datum.StringTerm;
-import cc.vidr.datum.Term;
+import cc.vidr.datum.term.Atom;
+import cc.vidr.datum.term.DateTimeTerm;
+import cc.vidr.datum.term.StringTerm;
+import cc.vidr.datum.term.Term;
 
 /**
  * Builtin for determining if the type of a term.

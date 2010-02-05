@@ -17,7 +17,7 @@
 
 grammar Datalog;
 
-@header        { package cc.vidr.datum; }
+@header        { package cc.vidr.datum; import cc.vidr.datum.term.*; }
 @lexer::header { package cc.vidr.datum; }
 
 @members {

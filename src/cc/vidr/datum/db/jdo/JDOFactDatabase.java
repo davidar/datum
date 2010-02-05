@@ -24,10 +24,10 @@ import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
 import cc.vidr.datum.Literal;
-import cc.vidr.datum.Term;
 import cc.vidr.datum.UnsafeException;
 import cc.vidr.datum.db.AbstractFactDatabase;
 import cc.vidr.datum.db.FactDatabase;
+import cc.vidr.datum.term.Term;
 
 /**
  * An implementation of the FactDatabase interface backed by a JDO datastore.

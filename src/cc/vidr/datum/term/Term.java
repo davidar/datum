@@ -15,9 +15,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cc.vidr.datum;
+package cc.vidr.datum.term;
 
 import java.io.Serializable;
+
+import cc.vidr.datum.Substitution;
+import cc.vidr.datum.UnificationException;
 
 /**
  * A data structure used as the argument of a Literal.

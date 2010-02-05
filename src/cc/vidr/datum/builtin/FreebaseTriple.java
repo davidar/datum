@@ -17,17 +17,18 @@
 
 package cc.vidr.datum.builtin;
 
+import java.net.URLEncoder;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
 import org.json.simple.JSONObject;
 
-import cc.vidr.datum.Atom;
 import cc.vidr.datum.Literal;
-import cc.vidr.datum.StringTerm;
-import cc.vidr.datum.Term;
 import cc.vidr.datum.UnificationException;
+import cc.vidr.datum.term.Atom;
+import cc.vidr.datum.term.StringTerm;
+import cc.vidr.datum.term.Term;
 import cc.vidr.datum.util.FreebaseUtils;
 
 /**
@@ -75,7 +76,9 @@ public class FreebaseTriple extends Builtin {
     private List<Literal> query(String query, String property, String type)
     throws Exception {
         List<Literal> list = new LinkedList<Literal>();
-        for(JSONObject subject : FreebaseUtils.getResultList(path + query))
+        List<JSONObject> result = FreebaseUtils.getResultList(
+                path + URLEncoder.encode(query, "UTF-8"));
+        for(JSONObject subject : result)
             for(JSONObject object : (List<JSONObject>) subject.get(property))
                 try {
                     list.add(new Literal(predicate(),

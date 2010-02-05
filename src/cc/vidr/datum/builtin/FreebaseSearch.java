@@ -22,9 +22,9 @@ import java.util.List;
 
 import org.json.simple.JSONObject;
 
-import cc.vidr.datum.Atom;
 import cc.vidr.datum.Literal;
-import cc.vidr.datum.StringTerm;
+import cc.vidr.datum.term.Atom;
+import cc.vidr.datum.term.StringTerm;
 import cc.vidr.datum.util.FreebaseUtils;
 
 /**

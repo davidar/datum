@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cc.vidr.datum;
+package cc.vidr.datum.term;
 
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormatter;

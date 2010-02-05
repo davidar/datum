@@ -19,9 +19,9 @@ package cc.vidr.datum.builtin;
 
 import org.joda.time.format.DateTimeFormat;
 
-import cc.vidr.datum.DateTimeTerm;
 import cc.vidr.datum.Literal;
-import cc.vidr.datum.StringTerm;
+import cc.vidr.datum.term.DateTimeTerm;
+import cc.vidr.datum.term.StringTerm;
 
 /**
  * Builtin for formatting a datetime term to a string.

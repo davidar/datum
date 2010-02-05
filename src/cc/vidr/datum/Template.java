@@ -22,6 +22,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import cc.vidr.datum.term.Atom;
+import cc.vidr.datum.term.StringTerm;
+import cc.vidr.datum.term.Term;
+import cc.vidr.datum.term.Variable;
+
 /**
  * Provides template-based extraction of information from, and generation of
  * sentences.

@@ -20,6 +20,9 @@ package cc.vidr.datum;
 import java.util.HashMap;
 import java.util.Map;
 
+import cc.vidr.datum.term.Term;
+import cc.vidr.datum.term.Variable;
+
 /**
  * A substitution is a mapping of variables to terms.
  * 
