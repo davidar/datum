@@ -8,3 +8,7 @@ religion(X,Y)    :- freebase_triple(X,"/people/person/religion",object,Y).
 ethnicity(X,Y)   :- freebase_triple(X,"/people/person/ethnicity",object,Y).
 birthdate(X,Y)   :- freebase_triple(X,"/people/person/date_of_birth",datetime,Y).
 deathdate(X,Y)   :- freebase_triple(X,"/people/deceased_person/date_of_death",datetime,Y).
+height(X,Y)      :- freebase_triple(X,"/people/person/height_meters",float,V),
+                    measurement(Y,V,meter).
+weight(X,Y)      :- freebase_triple(X,"/people/person/weight_kg",float,V),
+                    measurement(Y,V,kilogram).

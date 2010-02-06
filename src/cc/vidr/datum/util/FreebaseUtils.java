@@ -31,6 +31,8 @@ import org.json.simple.parser.ParseException;
 
 import cc.vidr.datum.term.Atom;
 import cc.vidr.datum.term.DateTimeTerm;
+import cc.vidr.datum.term.FloatTerm;
+import cc.vidr.datum.term.IntegerTerm;
 import cc.vidr.datum.term.StringTerm;
 import cc.vidr.datum.term.Term;
 
@@ -83,10 +85,12 @@ public final class FreebaseUtils {
                         s.substring("freebase:guid:".length()) + "\"";
             return "\"/en/" + s + "\"";
         }
-        if(term instanceof StringTerm)
-            return term.toString();
         if(term instanceof DateTimeTerm)
             return '"' + term.toString() + '"';
+        if(term instanceof StringTerm
+        || term instanceof FloatTerm
+        || term instanceof IntegerTerm)
+            return term.toString();
         throw new IllegalArgumentException("Unsupported type: " + term);
     }
     
@@ -103,7 +107,9 @@ public final class FreebaseUtils {
         if(type.equals("text"))
             return "{\"lang\":\"/lang/en\"," +
                    "\"value\":" + termToString(term) + "}";
-        if(type.equals("datetime"))
+        if(type.equals("datetime")
+        || type.equals("float")
+        || type.equals("int"))
             return "{\"value\":" + termToString(term) + "}";
         throw new IllegalArgumentException("Invalid type: " + type);
     }
@@ -122,6 +128,10 @@ public final class FreebaseUtils {
             return new StringTerm((String) o.get("value"));
         if(type.equals("datetime"))
             return new DateTimeTerm((String) o.get("value"));
+        if(type.equals("float"))
+            return new FloatTerm((Number) o.get("value"));
+        if(type.equals("int"))
+            return new IntegerTerm((Number) o.get("value"));
         throw new IllegalArgumentException("Invalid type: " + type);
     }
     

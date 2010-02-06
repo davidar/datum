@@ -4,6 +4,7 @@ name(birthplace, "place of birth").
 name(profession, "job").
 name(birthdate, "dob").
 name(birthdate, "date of birth").
+name(deathdate, "date of death").
 
 preferred_name(gender, "gender").
 preferred_name(birthplace, "birthplace").
@@ -12,3 +13,6 @@ preferred_name(profession, "profession").
 preferred_name(religion, "religion").
 preferred_name(ethnicity, "ethnicity").
 preferred_name(birthdate, "birthdate").
+preferred_name(deathdate, "deathdate").
+preferred_name(height, "height").
+preferred_name(weight, "weight").

@@ -13,3 +13,7 @@ has(X,nationality,Y) :- nationality(X,Y).
 has(X,profession,Y)  :- profession(X,Y).
 has(X,religion,Y)    :- religion(X,Y).
 has(X,ethnicity,Y)   :- ethnicity(X,Y).
+has(X,birthdate,Y)   :- birthdate(X,Y).
+has(X,deathdate,Y)   :- deathdate(X,Y).
+has(X,height,Y)      :- height(X,Y).
+has(X,weight,Y)      :- weight(X,Y).

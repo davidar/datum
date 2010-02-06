@@ -1,6 +1,9 @@
 question_template("where was #0 born", birthplace/2).
 question_template("when was #0 born", birthdate/2).
 question_template("when did #0 die", deathdate/2).
+question_template("how tall is #0", height/2).
+question_template("how heavy is #0", weight/2).
+question_template("how much does #0 weigh", weight/2).
 
 statement_template("#0 is a person", person/1).
 statement_template("#0 is male", male/1).
@@ -13,3 +16,5 @@ statement_template("#0 has religion #1", religion/2).
 statement_template("#0 has ethnicity #1", religion/2).
 statement_template("#0 was born on #1", birthdate/2).
 statement_template("#0 died on #1", deathdate/2).
+statement_template("#0 is #1 tall", height/2).
+statement_template("#0 weighs #1", weight/2).

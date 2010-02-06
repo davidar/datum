@@ -6,4 +6,4 @@ name(X,Y) :-
 preferred_name(X,X) :-
     term_type(X,string).
 preferred_name(X,Y) :-
-    datetime_format(X,Y).
+    term_format(X,Y).

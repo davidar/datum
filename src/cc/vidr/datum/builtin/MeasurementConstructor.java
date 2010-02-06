@@ -17,28 +17,37 @@
 
 package cc.vidr.datum.builtin;
 
-import org.joda.time.format.DateTimeFormat;
-
 import cc.vidr.datum.Literal;
-import cc.vidr.datum.term.DateTimeTerm;
-import cc.vidr.datum.term.StringTerm;
+import cc.vidr.datum.term.Atom;
+import cc.vidr.datum.term.FloatTerm;
+import cc.vidr.datum.term.Measurement;
 
 /**
- * Builtin for formatting a datetime term to a string.
+ * Allows (de-)construction of Measurements.
  * 
  * @author  David Roberts
  */
-public class DateTimeFormatBuiltin extends Builtin {
+public class MeasurementConstructor extends Builtin {
     protected String predicate() {
-        return "datetime_format/2";
+        return "measurement/3";
     }
     
     protected Literal[] handle(Literal goal) throws Exception {
-        DateTimeTerm datetime = (DateTimeTerm) goal.getArgument(0);
-        String s = datetime.toString(DateTimeFormat.longDate());
-        if(goal.getArgument(1).isVariable())
-            return new Literal[] {
-                new Literal(predicate(), datetime, new StringTerm(s)) };
-        return new Literal[0];
+        Measurement measurement;
+        double value;
+        Atom unit;
+        if(goal.getArgument(0).isVariable()) { // constructor
+            value = ((FloatTerm) goal.getArgument(1)).getValue();
+            unit = (Atom) goal.getArgument(2);
+            measurement = new Measurement(value, unit);
+        } else { // deconstructor
+            measurement = (Measurement) goal.getArgument(0);
+            value = measurement.getValue();
+            unit = measurement.getUnit();
+        }
+        Literal literal = new Literal(predicate(),
+                measurement, new FloatTerm(value), unit);
+        literal.unify(goal);
+        return new Literal[] {literal};
     }
 }

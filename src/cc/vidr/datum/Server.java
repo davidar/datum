@@ -18,8 +18,10 @@
 package cc.vidr.datum;
 
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -85,10 +87,10 @@ public final class Server {
          * @return  the array of facts
          */
         public Literal[] toArray() {
-            List<Literal> list = new ArrayList<Literal>();
+            Deque<Literal> list = new LinkedList<Literal>();
             ProofNode node = this;
             while(node != null) {
-                list.add(node.fact);
+                list.addFirst(node.fact);
                 node = node.next;
             }
             return list.toArray(new Literal[0]);

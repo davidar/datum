@@ -38,7 +38,8 @@ public abstract class Builtin {
         register(new TermType());
         register(new FreebaseSearch());
         register(new FreebaseTriple());
-        register(new DateTimeFormatBuiltin());
+        register(new TermFormat());
+        register(new MeasurementConstructor());
     }
     
     /**
